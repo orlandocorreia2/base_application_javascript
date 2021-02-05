@@ -1,0 +1,57 @@
+version: "3.0"
+
+services:
+  api:
+    container_name: app_api
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/usr/src/app:delegated
+    depends_on:
+      - db
+    networks:
+      - app-network
+  app:
+    container_name: app_app
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - ./app:/usr/src/app:delegated
+    depends_on:
+      - api
+    networks:
+      - app-network
+  db:
+    container_name: app_db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5432:5432
+    volumes:
+      - ./api/src/shared/database/data:/var/lib/postgresql/data:delegated
+      - ./api/src/shared/database/scripts:/scripts
+      - ./api/src/shared/database/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+  db_mongo:
+    container_name: app_db_mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./api/src/shared/database/mongo/data:/etc/mongo:delegated
+    networks:
+      - app-network
+  db_redis:
+    container_name: app_redis
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
