@@ -3,4 +3,3 @@ tmp/uploads/*
 !tmp/uploads/.gitkeep
 src/shared/database/data
 .env
-ormconfig.json
