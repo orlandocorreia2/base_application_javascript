@@ -9,7 +9,6 @@
 - Access application folder
 - `docker-compose up -d`
 - `docker exec -it pde_cfe_api bash`
-- `cd api`
 - `yarn`
 
 ## Setup docker database postgree
