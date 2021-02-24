@@ -11,7 +11,7 @@
 - `docker exec -it pde_cfe_api bash`
 - `yarn`
 
-## Setup docker database postgree
+## Setup docker database postgre
 
 - Create database pde_cfe in your app manager database with user: postgres and password: root
 - `yarn typeorm migration:run `
