@@ -12,7 +12,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-
 import api from '../../services/api';
 
 import Input from '../../components/Input';
@@ -71,6 +70,8 @@ const SignUp: React.FC = () => {
 
           return;
         }
+
+        console.log(error);
 
         Alert.alert(
           'Erro no cadastro',
